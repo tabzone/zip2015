@@ -1,0 +1,62 @@
+<section class="theme-light container-fluid properties-container" ng-if="!properties.Page">
+	<p class="h5 text-center">Loading, please wait...</p>
+</section>
+
+<section class="theme-light container-fluid properties-container" ng-if="properties.Page">
+
+	<div class="row">
+
+		<section class="col-md-2 clearfix properties-filters">
+			<h1 class="h5">Narrow your search</h1>
+
+			<form ng-submit="filterProperties()">
+
+				<div class="input-group">
+					<label for="suburb" class="property-filter">Suburb</label>
+					<input type="text" name="suburb" ng-model="suburb" class="property-filter-input">
+				</div>
+
+				<div class="input-group input-price">
+					<label for="price" class="property-filter">Price per week</label>
+					<input id="price" ion-range-slider ion-range-slider-min="{{minPrice}}" ion-range-slider-max="{{maxPrice}}" />
+				</div>
+
+				<div class="input-group input-bedrooms">
+					<label for="bedrooms" class="property-filter">Min bedrooms</label>
+					<div>
+						<a class="glyphicon glyphicon-chevron-left" ng-click="adjustBedrooms(-1)" aria-hidden="true"></a>
+						<span>{{bedrooms}}</span>
+						<a class="glyphicon glyphicon-chevron-right u-clickable" ng-click="adjustBedrooms(1)" aria-hidden="true"></a>
+					</div>
+				</div>
+
+			</form>
+
+		</section>
+
+		<section class="col-md-10 properties-results">
+
+			<h1 class="h5">{{filteredProperties.length}} homes found</h1>
+
+			<ul class="list-unstyled">
+				<!-- create filtered list variable. See: http://stackoverflow.com/a/18593018 -->
+				<li class="pull-left" ng-repeat="property in filteredProperties = (properties.List | meetCriteria:minPrice:maxPrice:bedrooms:suburb)">
+					<a class="property" href="http://www.tmsandbox.co.nz/property/residential-property-to-rent/auction-{{property.ListingId}}.htm" target="_blank">
+						
+						<div class="property-content u-center">
+							<img ng-src="{{property.PictureHref}}" />
+						</div>
+						<p class="property-content property-details u-text-shadow">{{property.Suburb}}, {{property.Bedrooms}} bedrooms<br />
+						${{property.RentPerWeek}} pw<br />
+						Available {{property.AvailableFrom}}</p>
+					</a>
+				</li>
+			</ul>
+
+			<p ng-if="filteredProperties.length == 0">No properties found</p>		
+
+		</section>
+
+	</div>
+
+</section>

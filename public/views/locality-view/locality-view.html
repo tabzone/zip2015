@@ -1,0 +1,46 @@
+
+ <div  ng-controller="LocalityViewController as card">
+   
+<div id="viewport" data-ng-hide="menu.isShowing">
+        <ul class="stack" swing-stack swing-options="options" >           
+            <li
+                swing-card
+                swing-on-throwout="throwout(eventName, eventObject)"
+                swing-on-throwoutleft="throwoutleft(eventName, eventObject)"
+                swing-on-throwoutright="throwoutright(eventName, eventObject)"
+                swing-on-throwin="throwin(eventName, eventObject)"
+                swing-on-dragstart="dragstart(eventName, eventObject)"
+                swing-on-dragmove="dragmove(eventName, eventObject)"
+                swing-on-dragend="dragend(eventName, eventObject)"
+                ng-repeat="card in cards" ng-class="card.name">
+                 <img ng-src="{{card.image}}">
+                 <span class="cardname">  {{card.name}} </span>
+            </li>
+        </ul>
+</div>
+<div>
+<section class="listings">
+        <div class="wrapper">
+            <ul class="properties_list">
+                <li ng-repeat="listing in listings">
+                    <a href="#">
+                        <img src="{{listing.media[0].url}}" alt="" title="" class="property_img"/>
+                    </a>
+                    <span class="price"> {{listing.price}}</span>
+                    <div class="property_details">
+                        <h1>
+                            <a href="#"> {{listing.price}} Fuisque dictum tortor at purus libero</a>
+                        </h1>
+                        <h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
+                    </div>
+                </li>
+        </ul>
+
+
+</section>
+
+</div>
+</div>
+
+
+

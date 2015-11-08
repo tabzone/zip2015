@@ -1,0 +1,187 @@
+<form>
+  <div class="form-group">
+    <label for="session">Session</label>
+    <input type="text" class="form-control" id="session" placeholder="X-SESSION-TOKEN" value="test_user">
+  </div>
+</form>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><span class="label label-success">Live</span> GET <code><a href="/listing">/listing</a></code></h3>
+  </div>
+  <div class="panel-body">
+    Returns all the MLS listings
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><span class="label label-success">Live</span> GET <code><a href="/listing/deb1ebf3f0dbad34c3abf58053182336">/listing/:id</a></code></h3>
+  </div>
+  <div class="panel-body">
+    Returns a single listing
+  </div>
+</div>
+
+<div class="panel panel-default listing-post">
+  <div class="panel-heading">
+    <h3 class="panel-title"><span class="label label-danger">Not working</span> POST <code><a href="/listing/deb1ebf3f0dbad34c3abf58053182336">/listing/:id</a></code></h3>
+  </div>
+  <div class="panel-body">
+    Returns a single listing
+  </div>
+</div>
+
+<div class="panel panel-default votes">
+  <div class="panel-heading">
+    <h3 class="panel-title"><span class="label label-success">Live</span> GET <code><a href="/vote" class="api">/vote</a></code></h3>
+  </div>
+  <div class="panel-body">
+    <div class="">
+        Returns list of previous votes
+    </div>
+
+    <div>
+      Requires HTTP header "X-SESSION-TOKEN" to be a unique key that represents a user.
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default vote">
+  <div class="panel-heading">
+    <h3 class="panel-title"><span class="label label-success">Live</span> POST <code><a href="/vote/deb1ebf3f0dbad34c3abf58053182336" class="api">/vote/:id</a></code></h3>
+  </div>
+  <div class="panel-body">
+
+    <div>
+      Requires HTTP header "X-SESSION-TOKEN" to be a unique key that represents a user.
+    </div>
+
+
+    <div>
+      Form data: <code>vote=(true|false)</code>
+    </div>
+
+    <form class="form-inline" id="vote">
+      <div class="form-group">
+        <label class="sr-only" for="vote_id">ID</label>
+        <input type="text" class="form-control" id="vote_id" placeholder="ID" value="deb1ebf3f0dbad34c3abf58053182336">
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" id="vote_vote"> Vote
+        </label>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
+<div class="panel panel-default vote-results">
+  <div class="panel-heading">
+    <h3 class="panel-title"><span class="label label-danger">Not working</span> GET <code><a href="/vote/results" class="results">/vote/results</a></code></h3>
+  </div>
+  <div class="panel-body">
+    <div class="">
+        Returns list of voting results
+    </div>
+
+    <div>
+      Requires HTTP header "X-SESSION-TOKEN" to be a unique key that represents a user.
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><span class="label label-warning">Mock Data</span> GET <code><a href="/video">/video</a></code></h3>
+  </div>
+  <div class="panel-body">
+    Returns a list of videos
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="apiModal" tabindex="-1" role="dialog" aria-labelledby="apiResults">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="apiResults">API Response</h4>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  $('.votes .api').on('click', function(e) {
+    e.preventDefault();
+    var session = $('#session').val();
+    $('#apiModal .modal-body').empty().text('Loading...');
+
+    $.ajax({
+      method: 'get',
+      url: '/vote',
+      headers: {
+        "x-session-token": session
+      }
+    })
+    .success(function (data) {
+      data = JSON.stringify(data, null, 2);
+      $('#apiModal .modal-body').empty();
+      $('#apiModal .modal-body').append($('<pre/>').append(data));
+    })
+    .error(function (err) {
+      err = JSON.stringify(err, null, 2);
+      $('#apiModal .modal-body').empty();
+      $('#apiModal .modal-body').append($('<pre/>').append(err));
+    });
+
+    $('#apiModal').modal()
+  });
+
+  $('.vote .api').on('click', function(e) {
+    e.preventDefault();
+    var session = $('#session').val();
+    var id = $('#vote_id').val();
+    var vote = $('#vote_vote').is(':checked');
+
+
+    $('#apiModal .modal-body').empty().text('Loading...');
+
+    $.ajax({
+      method: 'post',
+      url: '/vote/' + id,
+      headers: {
+        "x-session-token": session
+      },
+      data: {
+        "vote": vote
+      }
+    })
+    .success(function (data) {
+      data = JSON.stringify(data, null, 2);
+      $('#apiModal .modal-body').empty();
+      $('#apiModal .modal-body').append($('<pre/>').append(data));
+    })
+    .error(function (err) {
+      err = JSON.stringify(err, null, 2);
+      $('#apiModal .modal-body').empty();
+      $('#apiModal .modal-body').append($('<pre/>').append(err));
+    });
+
+    $('#apiModal').modal()
+  });
+
+
+</script>

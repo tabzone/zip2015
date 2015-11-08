@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="rentMeApp" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Find Your Home</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+  <link href='http://fonts.googleapis.com/css?family=Bitter:700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="bower_components/ionrangeslider/css/ion.rangeSlider.css">
+  <link rel="stylesheet" href="bower_components/ionrangeslider/css/ion.rangeSlider.css">
+  <link rel="stylesheet" href="stylesheets/card-stack.css">
+  <link rel="stylesheet" href="stylesheets/responsive.css">
+  <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+
+  <nav class="navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Retsly Find!!</a>
+      </div>
+      <p class="navbar-text pull-right">A Retsly find<a href="#">experiment</a></p>
+    </div>
+  </nav>
+
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <div ng-view class="body"></div>
+
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="app.js"></script>
+  <script src="services/trade-me-service.js"></script>
+  <script src="views/locality-view/locality-view.js"></script>
+  <script src="views/properties-view/properties-view.js"></script>
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="bower_components/ionrangeslider/js/ion.rangeSlider.min.js"></script>
+  <script src="bower_components/angular-swing/dist/angular-swing.js"></script>
+  <script src="javascripts/card-stack.js"></script>
+
+</body>
+</html>
